@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            transition: opacity 1s ease-out;
+        }
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .alert-error, .alert-danger { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">Quora</a>
+
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="nav-link text-white">Welcome, {{ user.name }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% if form.errors %}
+        <div class="alert alert-danger msg">
+            {% for field, errors in form.errors.items %}
+                {{ errors.0 }} 
+            {% endfor %}
+        </div>
+    {% elif messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+{% endif %}
+
+<div class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    setTimeout(function(){
+        let msgs = document.querySelectorAll('.msg');
+        msgs.forEach(function(msg){
+            msg.style.opacity = '0';
+            setTimeout(() => msg.style.display = 'none', 1000); // fade out
+        });
+    }, 3000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    Email: <input type="text" name="email"><br><br>
+
+    Password:
+    <div style="position: relative; width: fit-content;">
+        <input type="password" name="password" id="passwordField">
+        <span onclick="togglePassword()" style="cursor: pointer; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);">
+            <i id="eyeIcon" class="fa fa-eye"></i>
+        </span>
+    </div>
+
+    <br><br>
+    <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+
+<!-- Font Awesome CDN for Eye Icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<script>
+    function togglePassword() {
+        var passwordInput = document.getElementById("passwordField");
+        var eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+</script>
+{% endblock %}
