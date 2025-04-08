@@ -14,7 +14,7 @@ A Django-based Quora-inspired web application where users can register, post que
 
 ## Steps to Setup and Run Django Project
 
-1. Clone the repository: `git clone https://github.com/rajesh80879/catalyst.git`
+1. Clone the repository: `git clone https://github.com/rajesh80879/quora.git`
 2. Create a python env and activate 
 3. Install dependencies: `pip install -r requirements.txt`
 4. Make migration:  `python manage.py makemigrations core`
@@ -23,7 +23,7 @@ A Django-based Quora-inspired web application where users can register, post que
 
 ## Database and env setup
 
-- Create an `.env` file in the `catalyst_count` folder.
+- Create an `.env` file in the `quora` folder.
 
 - Add the following configuration variables to the `.env` file:
 
